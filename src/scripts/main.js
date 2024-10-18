@@ -358,19 +358,22 @@ const people = [
 // console.log(people);
 
 const table = document.querySelector('.dashboard');
-let rows = '';
 
 people.forEach((person) => {
-  rows += `
-  <tr>
-      <td>${person.name}</td>
-      <td>${(person.gender = person.sex === 'f' ? 'female' : 'male')}</td>
-      <td>${person.born}</td>
-      <td>${person.died}</td>
-      <td>${person.died - person.born}</td>
-      <td>${Math.ceil(person.died / 100)}</td>
-  </tr>
-`;
-});
+  const { names, sex, born, died } = person;
+  const age = died - born;
+  const century = Math.ceil(died / 100);
+  const gender = sex === 'm' ? 'Male' : 'Female';
 
-table.firstElementChild.insertAdjacentHTML('beforeend', rows);
+  table.firstElementChild.insertAdjacentHTML(
+    'beforeend',
+    ` <tr>
+      <td>${names}</td>
+      <td>${gender}</td>
+      <td>${born}</td>
+      <td>${died}</td>
+      <td>${age}</td>
+      <td>${century}</td>
+    </tr>`,
+  );
+});
